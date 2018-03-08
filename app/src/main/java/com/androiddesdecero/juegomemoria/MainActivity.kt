@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.cartas_imagen.*
@@ -128,5 +129,86 @@ class MainActivity : AppCompatActivity() {
                 comprobarCorrecto()
             },1000)
         }
+    }
+
+    private fun comprobarCorrecto(){
+        if(primeraCarta == segundaCarta){
+            when(primerClick){
+                0 -> im11.visibility = View.INVISIBLE
+                1 -> im12.visibility = View.INVISIBLE
+                2 -> im13.visibility = View.INVISIBLE
+                3 -> im21.visibility = View.INVISIBLE
+                4 -> im22.visibility = View.INVISIBLE
+                5 -> im23.visibility = View.INVISIBLE
+                6 -> im31.visibility = View.INVISIBLE
+                7 -> im32.visibility = View.INVISIBLE
+                8 -> im33.visibility = View.INVISIBLE
+                9 -> im41.visibility = View.INVISIBLE
+            }
+
+            when(segundoClick){
+                0 -> im11.visibility = View.INVISIBLE
+                1 -> im12.visibility = View.INVISIBLE
+                2 -> im13.visibility = View.INVISIBLE
+                3 -> im21.visibility = View.INVISIBLE
+                4 -> im22.visibility = View.INVISIBLE
+                5 -> im23.visibility = View.INVISIBLE
+                6 -> im31.visibility = View.INVISIBLE
+                7 -> im32.visibility = View.INVISIBLE
+                8 -> im33.visibility = View.INVISIBLE
+                9 -> im41.visibility = View.INVISIBLE
+            }
+
+            if(turno == 1){
+                puntosPlayer1++
+                mainActivityTvPlayer1.setText("Player1: " + puntosPlayer1)
+            }else{
+                puntosPlayer2++
+                mainActivityTvPlayer2.setText("Player2: " + puntosPlayer2)
+            }
+        }else{
+            im11.setImageResource(R.drawable.ic_box_black)
+            im12.setImageResource(R.drawable.ic_box_black)
+            im13.setImageResource(R.drawable.ic_box_black)
+
+            im21.setImageResource(R.drawable.ic_box_black)
+            im22.setImageResource(R.drawable.ic_box_black)
+            im23.setImageResource(R.drawable.ic_box_black)
+
+            im31.setImageResource(R.drawable.ic_box_black)
+            im32.setImageResource(R.drawable.ic_box_black)
+            im33.setImageResource(R.drawable.ic_box_black)
+
+            im41.setImageResource(R.drawable.ic_box_black)
+
+            if(turno == 1){
+                turno = 2
+                mainActivityTvPlayer1.setTextColor(Color.GRAY)
+                mainActivityTvPlayer1.setTypeface(null, Typeface.NORMAL)
+                mainActivityTvPlayer2.setTextColor(Color.RED)
+                mainActivityTvPlayer2.setTypeface(null, Typeface.BOLD)
+            }else{
+                turno = 1
+                mainActivityTvPlayer1.setTextColor(Color.GREEN)
+                mainActivityTvPlayer1.setTypeface(null, Typeface.BOLD)
+                mainActivityTvPlayer2.setTextColor(Color.GRAY)
+                mainActivityTvPlayer2.setTypeface(null, Typeface.NORMAL)
+            }
+        }
+        im11.isEnabled = true
+        im12.isEnabled = true
+        im13.isEnabled = true
+
+        im21.isEnabled = true
+        im22.isEnabled = true
+        im23.isEnabled = true
+
+        im31.isEnabled = true
+        im32.isEnabled = true
+        im33.isEnabled = true
+
+        im41.isEnabled = true
+
+        finPartida()
     }
 }

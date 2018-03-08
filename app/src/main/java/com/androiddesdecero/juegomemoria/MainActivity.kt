@@ -4,7 +4,10 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.cartas_imagen.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         Collections.shuffle(cartas)
 
         // 4.- setUp OnClickListener
+        setUpOnClickListner()
 
     }
 
@@ -69,5 +73,60 @@ class MainActivity : AppCompatActivity() {
         image23 = R.drawable.ic_car
         image24 = R.drawable.ic_flight
         image25 = R.drawable.ic_railway
+    }
+
+    private fun setUpOnClickListner(){
+        im11.setOnClickListener(){
+            var carta: Int = 0
+            asignarImagenalaCarta(im11, carta)
+        }
+    }
+
+    private fun asignarImagenalaCarta(image: ImageView, carta: Int){
+        when(cartas[carta]){
+            11 -> image.setImageResource(image11)
+            12 -> image.setImageResource(image12)
+            13 -> image.setImageResource(image13)
+            14 -> image.setImageResource(image14)
+            15 -> image.setImageResource(image15)
+
+            21 -> image.setImageResource(image21)
+            22 -> image.setImageResource(image22)
+            23 -> image.setImageResource(image23)
+            24 -> image.setImageResource(image24)
+            25 -> image.setImageResource(image25)
+        }
+        if(numeroCarta == 1) {
+            primeraCarta = cartas[carta]
+            if (primeraCarta > 20) {
+                primeraCarta = primeraCarta - 10
+            }
+            numeroCarta = 2
+            primerClick = carta
+            image.isEnabled = false
+        }else if(numeroCarta == 2){
+            segundaCarta = cartas[carta]
+            if (segundaCarta > 20) {
+                segundaCarta = segundaCarta - 10
+            }
+            numeroCarta = 1
+            segundoClick = carta
+
+            im11.isEnabled = false
+            im12.isEnabled = false
+            im13.isEnabled = false
+            im21.isEnabled = false
+            im22.isEnabled = false
+            im23.isEnabled = false
+            im31.isEnabled = false
+            im32.isEnabled = false
+            im33.isEnabled = false
+            im41.isEnabled = false
+
+            var handler = Handler()
+            handler.postDelayed(Runnable {
+                comprobarCorrecto()
+            },1000)
+        }
     }
 }

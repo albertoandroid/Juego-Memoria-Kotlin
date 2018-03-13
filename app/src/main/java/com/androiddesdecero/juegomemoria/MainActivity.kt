@@ -1,10 +1,12 @@
 package com.androiddesdecero.juegomemoria
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     var segundaCarta: Int = 0
     var primerClick: Int = 0
     var segundoClick: Int = 0
-    var numeroCarta: Int = 0
+    var numeroCarta: Int = 1
 
     var cartas = ArrayList<Int>(listOf(11,12,13,14,15,21,22,23,24,25))
 
@@ -80,6 +82,51 @@ class MainActivity : AppCompatActivity() {
         im11.setOnClickListener(){
             var carta: Int = 0
             asignarImagenalaCarta(im11, carta)
+        }
+
+        im12.setOnClickListener(){
+            var carta: Int = 1
+            asignarImagenalaCarta(im12, carta)
+        }
+
+        im13.setOnClickListener(){
+            var carta: Int = 2
+            asignarImagenalaCarta(im13, carta)
+        }
+
+        im21.setOnClickListener(){
+            var carta: Int = 3
+            asignarImagenalaCarta(im21, carta)
+        }
+
+        im22.setOnClickListener(){
+            var carta: Int = 4
+            asignarImagenalaCarta(im22, carta)
+        }
+
+        im23.setOnClickListener(){
+            var carta: Int = 5
+            asignarImagenalaCarta(im23, carta)
+        }
+
+        im31.setOnClickListener(){
+            var carta: Int = 6
+            asignarImagenalaCarta(im31, carta)
+        }
+
+        im32.setOnClickListener(){
+            var carta: Int = 7
+            asignarImagenalaCarta(im32, carta)
+        }
+
+        im33.setOnClickListener(){
+            var carta: Int = 8
+            asignarImagenalaCarta(im33, carta)
+        }
+
+        im41.setOnClickListener(){
+            var carta: Int = 9
+            asignarImagenalaCarta(im41, carta)
         }
     }
 
@@ -211,4 +258,30 @@ class MainActivity : AppCompatActivity() {
 
         finPartida()
     }
+
+    private fun finPartida(){
+        if(im11.visibility == View.INVISIBLE &&
+                im12.visibility == View.INVISIBLE &&
+                im13.visibility == View.INVISIBLE &&
+                im21.visibility == View.INVISIBLE &&
+                im22.visibility == View.INVISIBLE &&
+                im23.visibility == View.INVISIBLE &&
+                im31.visibility == View.INVISIBLE &&
+                im32.visibility == View.INVISIBLE &&
+                im33.visibility == View.INVISIBLE &&
+                im41.visibility == View.INVISIBLE){
+            var alertDialog = AlertDialog.Builder(this@MainActivity).create()
+            alertDialog.setTitle("Fin de Partida")
+            alertDialog.setMessage("Player 1: " + puntosPlayer1 + "\nPlayer 2: " + puntosPlayer2)
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK"){
+                dialogInterface, i ->
+                var intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            alertDialog.show()
+        }
+    }
+
+
 }
